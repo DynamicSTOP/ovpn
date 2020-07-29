@@ -1,0 +1,3 @@
+#!/bin/bash
+
+#printf 'MyPassword\nMyPassword\n' | adduser john

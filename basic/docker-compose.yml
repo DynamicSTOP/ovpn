@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  openvpn:
+    cap_add:
+      - NET_ADMIN
+    build: .
+    image: ovpn_basic:1
+    container_name: ovpn_basic
+    ports:
+      - "9010:1194/udp"
+      - "9011:1080"
+    restart: unless-stopped
+    volumes:
+      - ./vpn:/etc/openvpn
+      - ./sockd.conf:/etc/sockd.conf:ro
+      - ./addSocksUsers.sh:/root/addSocksUsers.sh
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5mb"
+        max-file: "3"
