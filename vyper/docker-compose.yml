@@ -1,0 +1,29 @@
+version: '3'
+services:
+  openvpn:
+    cap_add:
+      - NET_ADMIN
+    build: .
+    image: ovpn_vyper:1
+    tty: true
+    privileged: true
+    container_name: ovpn_vyper
+    ports:
+      - "9020:1194/udp"
+      - "9021:1080"
+    restart: unless-stopped
+    volumes:
+      - ./vpn:/etc/openvpn
+      - ./sockd.conf:/etc/sockd.conf:ro
+      - ./client.ovpn:/etc/openvpn/client.conf:ro
+      - ./auth.txt:/etc/openvpn/auth.txt:ro
+      - ./vyper.sh:/etc/vyper.sh:ro
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5mb"
+        max-file: "3"
+    command: ["bash","-c", "/etc/vyper.sh"]

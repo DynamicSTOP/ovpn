@@ -1,4 +1,6 @@
 ```bash
+copy auth.txt.example auth.txt
+nano auth.txt
 copy addSocksUsers.sh.example addSocksUsers.sh
 nano addSocksUsers.sh
 docker-compose build
