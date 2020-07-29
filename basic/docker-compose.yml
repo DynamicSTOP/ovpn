@@ -10,7 +10,7 @@ services:
     ports:
       - "9010:1194/udp"
       - "9011:1080"
-    #restart: unless-stopped
+    restart: unless-stopped
     volumes:
       - ./vpn:/etc/openvpn
       - ./sockd.conf:/etc/sockd.conf:ro
@@ -23,6 +23,4 @@ services:
       options:
         max-size: "5mb"
         max-file: "3"
-    #command: ["sh", "-c", "/var/addSocksUsers.sh && sockd && open_vpn"]
-    #command: ["bash","-c", "sockd -D && /bin/local/open_vpn"]
     command: ["bash","-c", "sockd -D && ovpn_run"]
