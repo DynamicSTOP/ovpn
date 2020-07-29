@@ -14,7 +14,6 @@ services:
     volumes:
       - ./vpn:/etc/openvpn
       - ./sockd.conf:/etc/sockd.conf:ro
-      - ./addSocksUsers.sh:/var/addSocksUsers.sh:ro
     dns:
       - 8.8.8.8
       - 8.8.4.4
