@@ -34,6 +34,8 @@ COPY sockd.conf /etc/
 
 EXPOSE 1080
 
-RUN /root/addSocksUsers.sh
-
-CMD sockd
+COPY addSocksUsers.sh /tmp/
+RUN chmod +x /tmp/addSocksUsers.sh \
+    && ls -la /tmp/\
+    && /tmp/addSocksUsers.sh \
+    && rm /tmp/addSocksUsers.sh
